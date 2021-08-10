@@ -10,6 +10,9 @@ POC para demostrar a utilização do Jager para tracing distribuido
 
 1 - No diretório do projeto raiz executar o comando via terminal: docker-compose up -d <br>
 2 - Resultado do comando:
+
+![resultado do comando](https://user-images.githubusercontent.com/6663107/128943458-24c4f1ba-668c-484b-819b-66e275a501be.PNG)
+
 3 - Via Postman importar a collection quasar.postman_collection.json
 
 
