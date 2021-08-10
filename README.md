@@ -13,7 +13,13 @@ POC para demostrar a utilização do Jager para tracing distribuido
 
 ![resultado do comando](https://user-images.githubusercontent.com/6663107/128943458-24c4f1ba-668c-484b-819b-66e275a501be.PNG)
 
-3 - Via Postman importar a collection quasar.postman_collection.json
+3 - Via Postman importar a collection collection crud-trace.postman_collection.json
+
+
+Acesse o Jaeger http://localhost:16686/search
+
+![jaeger](https://user-images.githubusercontent.com/6663107/128943518-26987e0c-f1e6-4743-b3af-b172959a551a.PNG)
+
 
 
 
