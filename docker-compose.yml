@@ -3,22 +3,22 @@ version: '3.8'
 services:
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: junin317/trace:1.0
+    build: .
     container_name: app_container
     ports:
       - 8080:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:tracing:mysql://mysql:3306/tracedb?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_URL=jdbc:tracing:mysql://mysql:3306/tracedb?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=America/Sao_Paulo
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=io.opentracing.contrib.jdbc.TracingDriver
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
+      - OPENTRACING_JAEGER_UDP-SENDER_HOST=jaeger
+      - OPENTRACING_JAEGER_UDP-SENDER_PORT=6831
     depends_on:
-      - mysql
-      - jaeger
-    command: [ "-c","/app/wait-for-mysql.sh mysql:3306 && java -jar /app/app.jar" ]
-    entrypoint: [ "/bin/sh" ]
+      mysql:
+        condition: service_healthy
+      jaeger:
+        condition: service_started
 
   mysql:
     image: mysql:8.0
@@ -30,6 +30,10 @@ services:
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: tracedb
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 60s
+      retries: 10
 
   jaeger:
     image: jaegertracing/all-in-one:1.23
