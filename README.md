@@ -3,7 +3,8 @@ POC para demostrar a utilização do Jager para tracing distribuido
 
 # Start project java -jar 
 
-1 - Ir ao diretório target e executar o comando via terminal: java -jar trace-0.0.1-SNAPSHOT.jar <br>
+1 - Ir ao diretório target e executar o comando via terminal: java -jar trace-0.0.1-SNAPSHOT.jar ou mvn spring-boot:run '-Dspring-boot.run.arguments=--server.port=8080'
+<br>
 2 - Via Postman importar a collection crud-trace.postman_collection.json
 
 # Start project container docker-compose
